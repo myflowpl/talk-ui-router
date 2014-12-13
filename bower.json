@@ -1,0 +1,24 @@
+{
+  "name": "ui-router-talk",
+  "version": "0.0.0",
+  "authors": [
+    "Piotr Blaszczak <pedro.blaszczak@gmail.com>"
+  ],
+  "description": "ui-router presentation talk",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "ui-router"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
