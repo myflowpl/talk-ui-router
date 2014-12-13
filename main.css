@@ -1,0 +1,51 @@
+.navbar {
+    display: block;
+    list-style-type: none;
+    overflow: hidden;
+    border-bottom: 1px solid gray;
+    max-width: 500px;
+    margin: auto;
+    padding: 0 5px;
+}
+.navbar .logo a {
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.navbar .logo {
+    margin: 2px 20px 0 0;
+}
+.navbar li {
+    float: left;
+    margin: 5px 20px 5px 0px;
+}
+.navbar a {
+    text-decoration: none;
+}
+.logo {
+    content: 'ui-router'
+}
+body > ui-view {
+    display: block;
+    max-width: 500px;
+    margin: auto;
+}
+
+.left {
+    display: block;
+    width: 20%;
+    border-right: 1px solid gray;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0;
+    float: left;
+}
+.left li {
+    margin: 10px 10px;
+    display:block;
+}
+.center {
+    padding: 20px 0;
+    float: right;
+    width: 75%;
+}

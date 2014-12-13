@@ -1,0 +1,8 @@
+<div>
+    <ul class="left">
+        <li ng-repeat="product in products">
+            <a ui-sref="products.product({id: product.id})">{{product.name}}</a>
+        </li>
+    </ul>
+    <ui-view class="center"></ui-view>
+</div>
