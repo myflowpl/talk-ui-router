@@ -2,7 +2,9 @@
     <h3>Features of: {{product.name}}</h3>
     <ul>
         <li ng-repeat="feature in product.features">
-            <a ui-sref="products.product({id: product.id})">{{feature}}</a>
+            <b><a ui-sref="products.product.feature({index: $index})">{{feature}}</a></b>
+            (<a ui-sref="products.product.feature-edit({index: $index})">edit</a>)
+            (<a ui-sref="products.product.feature-view({index: $index})">view</a>)
         </li>
     </ul>
 </div>

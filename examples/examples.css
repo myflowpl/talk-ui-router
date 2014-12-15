@@ -95,7 +95,7 @@ body {
 /*named views*/
 .root-view {
     background-color: #009926;
-    padding: 10px 5px 5px;
+    padding: 20px 5px 5px;
     overflow: hidden;
 }
 .welcome-content {
@@ -134,4 +134,31 @@ body {
 }
 .navbar-view .navbar {
     border: 0;
+}
+
+.modal-view {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.modal-view div[ui-view]{
+   background-color: white;
+    position: relative;
+    z-index: 1;
+    width: 500px;
+    margin: 40px auto 0;
+    padding: 20px;
+}
+
+.modal-view .modal-mask{
+    background-color: black;
+    opacity: .4;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
 }

@@ -54,21 +54,42 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('products.product.feature', {
+            url: "/feature/:index",
+            views: {
+                "content@products": {
+                    templateUrl: "views/feature.html",
+                    controller: 'FeatureController'
+                }
+            }
+        })
+        .state('products.product.feature-edit', {
+            url: "/feature-edit/:index",
+            views: {
+                "@app": {
+                    templateUrl: "views/feature-edit.html",
+                    controller: 'FeatureEditController'
+                }
+            }
+        })
+        .state('products.product.feature-view', {
+            url: "/feature-view/:index",
+            views: {
+                "modal@": {
+                    templateUrl: "views/modal-layout.html"
+                },
+                "@products.product.feature-view": {
+                    templateUrl: "views/feature-edit.html",
+                    controller: 'FeatureEditController'
+                }
+            }
+        })
         .state('contact', {
             url: "/products",
             parent: 'app',
             views: {
                 "": {
                     templateUrl: "views/contact.html"
-                }
-            },
-            resolve: {
-                products: function(){
-                    return [
-                        {id:1, name: 'AngularJS', features:['routing', 'services', 'directives', 'data binding']},
-                        {id:2, name: 'ReactJS', features:['faster', 'routing', 'data binding']},
-                        {id:3, name: 'EmberJS', features:['fast', 'routing', 'data binding']},
-                    ]
                 }
             }
         })
@@ -81,5 +102,19 @@ myApp.controller('ProductsController', function($scope, products) {
 myApp.controller('FeatureListController', function($scope,$filter, $stateParams, products) {
     $scope.id = $stateParams.id;
     $scope.product = $filter('filter')(products, $stateParams.id)[0];
+})
+myApp.controller('FeatureController', function($scope,$filter, $stateParams, products) {
+    $scope.id = $stateParams.id;
+    $scope.product = $filter('filter')(products, $stateParams.id)[0];
+    if($scope.product) {
+        $scope.feature = $scope.product.features[$stateParams.index]
+    }
+})
+myApp.controller('FeatureEditController', function($scope,$filter, $stateParams, products) {
+    $scope.id = $stateParams.id;
+    $scope.product = $filter('filter')(products, $stateParams.id)[0];
+    if($scope.product) {
+        $scope.index = $stateParams.index;
+    }
 })
 
