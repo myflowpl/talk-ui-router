@@ -74,3 +74,15 @@ body {
     float: right;
     width: 75%;
 }
+.center ui-view {
+    position: absolute;
+}
+/*Animations*/
+.view-change-animation.ng-enter {
+    -webkit-animation: bounceInLeft 1s;
+    animation: bounceInLeft 1s;
+}
+.view-change-animation.ng-leave {
+    -webkit-animation: bounceOutRight 2s;
+    animation: bounceOutRight 2s;
+}
