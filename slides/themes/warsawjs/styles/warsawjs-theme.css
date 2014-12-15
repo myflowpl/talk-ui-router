@@ -18,6 +18,7 @@
 }
 
 .slide h2 {
+  margin-bottom: 15px;
   color: #f7302f;
   font-weight: normal;
   font-family: firalight, sans-serif;
@@ -53,8 +54,12 @@
   height: 200px;
   margin: 0px;
   color: black;
+  font-size: 48px;
 }
 
+.front-page .content h2 span {
+  font-size: 30px;
+}
 .front-page .content p {
   padding: 0px;
   margin: 0px;
@@ -96,4 +101,28 @@
 
 .full .progress div {
   border-color: transparent transparent #f7302f;
+}
+/*CUSTOMS FOR UI_ROUTER*/
+.slide>div {
+  padding: 30px 100px 0;
+  width: 824px;
+  height: 590px;
+}
+.slide ol li, .slide ul li {
+  text-indent: -1.7em;
+}
+.prettyprint li {
+  line-height: 37px;
+}
+.slide pre {
+  margin: 0;
+}
+xmp {
+  margin:0;
+}
+pre.prettyprint, xmp.prettyprint {
+  border: 0 !important;
+  background-color: #EDEDED;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }

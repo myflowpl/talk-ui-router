@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UI-Router at WarsawJS</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="vendor/prettify.css">
+
+    <link rel="stylesheet" href="themes/warsawjs/styles/ribbon-theme.css">
+    <link rel="stylesheet" href="themes/warsawjs/styles/warsawjs-theme.css">
+</head>
+<body class="list" onload="prettyPrint()">
+    <header class="caption">
+        <h1>WarsawJS</h1>
+        <p>We talk about JavaScript. Each month in Warsaw, Poland.</p>
+    </header>
+
+    <!--INTRO PAGE-->
+    <section class="slide front-page">
+        <div>
+            <div class="logo">
+                <img src="themes/warsawjs/pictures/logo.png">
+            </div>
+            <div class="content">
+                <h2>
+                    Large Application Routing<br>
+                    <span>using AngularJS UI-Router</span>
+                </h2>
+
+                <p>
+                    Piotr Błaszczak <a href="http://twitter.com/MyFlowPl">@MyFlowPL</a><br>
+                    <a href="http://myflowpl.github.io/talk-ui-router">myflowpl.github.io/talk-ui-router</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!--My Self-->
+    <section class="slide">
+        <div>
+            <h2>Piotr Błaszczak</h2>
+            <h3>JavaScript & PHP Developer at Nowoczesna Firma S.A.</h3>
+            <h5>7 years of experience in web development</h5>
+            <Hr>
+            <div class="next">
+                <h2>JavaScript</h2>
+                <p>ExtJS, Yui, DojoToolkit, jQuery-UI, BackboneJS & MarionetteJS <br>
+                <span class="next">AngularJS, Yeoman, NodeJS</span>
+                </p>
+            </div>
+            <div class="next">
+                <h2>PHP & MySQL</h2>
+                <p>Zend Framework, Yii, Symfony 2, Zend Framework 2, Doctrine 2</p>
+            </div>
+        </div>
+        <style>
+            h5 {
+                font-size: 19px;
+                font-style: italic;
+            }
+        </style>
+    </section>
+
+    <!--AGENDA-->
+    <section class="slide">
+        <div>
+            <h2>Agenda</h2>
+            <ol>
+                <li>SPA, routing, AngularJS, UI-Router</li>
+                <li>Setup & configuration</li>
+                <li>States inheritance</li>
+                <li>$state, ui-view, ui-sref, ui-sref-active</li>
+                <li>Resolve & data</li>
+                <li>Named views</li>
+                <li>Events</li>
+                <li>404 not found, Authentication, Authorization</li>
+                <li>Animations</li>
+            </ol>
+        </div>
+    </section>
+
+
+    <!-- SPA -->
+    <section class="slide"><div>
+        <h2>Single Page Application</h2>
+        <ul>
+            <li>One request & one page load</li>
+            <li>Resources are dynamically loaded and added to the page,<Br>usually in response to user actions</li>
+            <li>No page reloads, everything works in background</li>
+            <li>High use of Ajax, WebSockets, Json, Xml</li>
+            <li>Provides more fluid user experience</li>
+            <li>But what about SEO & url sharing</li>
+        </ul>
+
+    </div></section>
+
+    <!-- Router -->
+    <section class="slide"><div>
+        <h2>Routing</h2>
+        <ul>
+            <li>Translates page URL</li>
+            <li>http://localhost/contacts/edit/23  (edit contact id: 23)</li>
+            <li>#hash</li>
+            <li>HTML 5 history.pushState()</li>
+            <li>$route</li>
+            <li>$state</li>
+        </ul>
+    </div></section>
+
+    <!-- AngularJS -->
+    <section class="slide"><div>
+        <h2>AngularJS</h2>
+        <ul>
+            <li>Controller<br>
+<xmp  class="prettyprint linenums ">function MyController($scope) {
+    $scope.name = "AngularJS"
+    $scope.reply = function(){ alert('reply') }
+}</xmp >
+            </li>
+            <li>HTML<br>
+<xmp  class="prettyprint linenums "><div ng-controller="MyController">
+    Hi, i'm {{name}}
+    <a ng-click="reply()">Say Hi</a>
+</div></xmp >
+            </li>
+        </ul>
+    </div></section>
+
+    <!-- AngularJS -->
+    <section class="slide"><div>
+        <h2>AngularJS</h2>
+        <ul>
+            <li>Service<br>
+<xmp  class="prettyprint linenums ">myApp.factory('myService', function () {
+    return { .. }
+})</xmp >
+            </li>
+            <li>Controller<br>
+<xmp  class="prettyprint linenums ">myApp.controller('MyController', function($scope, myService) {
+    myService.runIt()
+}</xmp >
+            </li>
+        </ul>
+    </div></section>
+
+    <!-- Router -->
+    <section class="slide"><div>
+        <h2>UI-Router</h2>
+        <ul>
+            <li>$route<br>
+<xmp  class="prettyprint linenums "><a href="/">Home</a>
+<a href="/items">Item list</a>
+<a href="/items/item/44">Item 44</a></xmp >
+            </li>
+            <li>$state<br>
+<xmp  class="prettyprint linenums "><a ui-sref="welcome">Home</a>
+<a ui-sref="items">Item list</a>
+<a ui-sref="items.item({id:44})">Item 44</a></xmp >
+            </li>
+        </ul>
+    </div></section>
+
+<!--SETUP-->
+    <section class="slide"><div>
+        <h2>Setup</h2>
+        <ul>
+            <li>Require Scripts (index.html)<br>
+                <pre class="prettyprint linenums ">
+                    &lt;script src=&quot;angular.js&quot;&gt;&lt;/script&gt;
+                    &lt;script src=&quot;angular-ui-router.js&quot;&gt;&lt;/script&gt;
+                    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;</pre>
+            </li>
+            <li>define your app module (app.js)<br>
+                <pre class="prettyprint linenums ">
+                    var myApp = angular.module('myApp', ['ui.router']);</pre>
+            </li>
+            <li>ng-app (index.html)<br>
+                <pre class="prettyprint linenums ">
+                    &lt;html ng-app=&quot;myApp&quot;&gt;</pre>
+            </li>
+        </ul>
+    </div></section>
+
+<!--CONFIGURATION-->
+    <section class="slide"><div>
+        <h2>Configuration </h2>
+        <ul>
+            <li>In your index.html<br>
+<xmp  class="prettyprint linenums "><a ui-sref="welcome">Home</a>
+<a ui-sref="contact">Contact</a>
+<div ui-view></div> </xmp >
+            </li>
+            <li>In your app.js<br>
+<xmp  class="prettyprint linenums language-css">myApp.config(
+function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $stateProvider
+        .state('welcome', {...})
+        .state('contact', {...})
+    $urlRouterProvider.otherwise("/");
+    $locationProvider.html5Mode(true);
+});</xmp >
+            </li>
+        </ul>
+    </div></section>
+
+<!--DEFINE STATES-->
+    <section class="slide"><div>
+        <h2>State definition </h2>
+<xmp class="prettyprint linenums language-css">$stateProvider
+    .state('welcome', {
+        url: "/",
+        templateUrl: "views/welcome.html"
+    })
+    .state('contact', {
+        url: "/contact",
+        templateUrl: "views/contact.html",
+        controller: 'ContactController'
+    })</xmp>
+        <a href="../examples/1_basic/index.html" target="_blank">Demo</a>
+    </div></section>
+
+
+<!--Inheritance diagram-->
+    <section class="slide diagram1" ><div>
+        <h2>Inheritance</h2>
+        <fieldset>
+            <legend>index.html (has root ui-view)</legend>
+            <fieldset class="lay">
+                <legend>views/products.html (has ui-view)</legend>
+                <fieldset class="menu">Link <br>Link <br>Link</fieldset>
+                <fieldset class="prod">
+                    <legend class="child-legend">views/product.html</legend>
+                </fieldset>
+            </fieldset>
+        </fieldset>
+    </div>
+        <style>
+            .diagram1 fieldset {
+                border: black solid 1px;
+                padding: 10px;
+
+            }
+            .diagram1 .menu{
+                width: 30%;
+                float: left;
+            }
+            .diagram1 .prod {
+                width: 60%;
+                float: right;
+                margin: -25px 0 0 0;
+                height: 175px;
+                background-color: #006666;
+            }
+            .diagram1 legend{
+                background-color: white;
+                padding: 0 5px;
+            }
+            .diagram1 .lay{
+                background-color: #C6DADC;
+            }
+            .diagram1 .child-legend{
+                position: relative;
+                top: 27px;
+                line-height: 40px;
+            }
+            .diagram1 {
+
+            }
+        </style>
+    </section>
+
+<!--Inheritance state definition-->
+    <section class="slide"><div>
+        <h2>Inheritance - state definition</h2>
+        <xmp class="prettyprint linenums language-css">$stateProvider
+    .state('products', {
+        url: "/contact",
+        templateUrl: "views/products.html",
+        controller: 'products'
+    })
+    .state('products.product', {
+        url: "/product/:id",
+        templateUrl: "views/product.html",
+        controller: 'product'
+    })</xmp>
+    </div></section>
+
+<!--Inheritance template-->
+    <section class="slide"><div>
+        <h2>Inheritance - template</h2>
+        <h3>views/products.html</h3>
+        <xmp class="prettyprint linenums language-css"><ul class="left">
+    <li ng-repeat="product in products">
+        <a ui-sref="products.product({id: product.id})">
+            {{product.name}}
+        </a>
+    </li>
+</ul>
+<ui-view class="center"></ui-view></xmp>
+        <a href="../examples/2_inheritance/index.html" target="_blank">Demo</a>
+    </div></section>
+
+
+
+<!--ui-router $state.go()-->
+    <section class="slide"><div>
+        <h2>$state service</h2>
+<xmp class="prettyprint linenums ">$state.go('contact.detail')
+$state.go('^') //will go to a parent state.
+$state.go('^.sibling') //will go to a sibling state.
+$state.go('.child.grandchild') //will go to a grandchild state.
+</xmp>
+        <h3>with state params</h3>
+
+<xmp class="prettyprint linenums ">// assume state url is: /contact/detail/:id
+$state.go('contact.detail', {id:44})
+// wil redirect to: /contact/detail/44
+</xmp>
+    </div></section>
+
+
+<!--ui-router ui-sref-->
+    <section class="slide"><div>
+        <h2>ui-sref directive</h2>
+<p>
+    <code>ui-sref='stateName'</code> - Navigate to state, no params.
+    'stateName' can be any valid absolute or relative state, following the same syntax rules as $state.go()
+    </p><p>
+    <code>ui-sref='stateName({param: value, param: value})'</code> - Navigate to state, with params.
+</p>
+    </div></section>
+
+    <!--Relative diagrams-->
+    <section class="slide cover"><div>
+        <img src="images/relative2.jpg" alt="">
+    </div></section>
+    <section class="slide cover"><div>
+        <img src="images/relative3.jpg" alt="">
+    </div></section>
+    <section class="slide cover"><div>
+        <img src="images/relative1.jpg" alt="">
+    </div></section>
+
+    <!--ui-router ui-sref-active -->
+    <section class="slide"><div>
+        <h2>ui-sref-active directive</h2>
+        <p>
+            <code>ui-sref-active='class1 class2'</code> - classes "class1" and "class2" are each added to the directive element when the related ui-sref's state is active, and removed when it is inactive.
+        </p><p>
+<xmp class="prettyprint linenums "><ul>
+    <li ui-sref-active="active" class="item">
+        <a href ui-sref="app.user({user: name})">{{name}}</a>
+    </li>
+    <!-- ... -->
+</ul>
+</xmp>
+    </p>
+    </div></section>
+
+    <!--ui-router ui-sref-active -->
+    <section class="slide"><div>
+        <h2>$stateParams service</h2>
+<xmp class="prettyprint linenums ">// If you had a url on your state of:
+url: '/users/:id/details/{type}/{repeat:[0-9]+}?from&to'
+
+// Then you navigated your browser to:
+'/users/123/details//0'
+
+// Your $stateParams object would be
+{ id:'123', type:'', repeat:'0' }
+
+// Then you navigated your browser to:
+'/users/123/details/default/0?from=there&to=here'
+
+// Your $stateParams object would be
+{ id:'123', type:'default', repeat:'0', from:'there', to:'here' }
+</xmp>
+    </div></section>
+
+
+    <!--Resolve -->
+    <section class="slide"><div>
+        <h2>resolve</h2>
+<xmp class="prettyprint linenums">.state('products', {
+    ...
+    resolve: {
+        user: function($http){
+            return $http.get('/user/profile')
+        }
+    },
+    controller: function($scope, user) {
+        $scope.user = user;
+    }
+})</xmp>
+    </div></section>
+
+    <!-- data-->
+    <section class="slide"><div>
+        <h2>data</h2>
+<xmp class="prettyprint linenums">.state('products', {
+    ...
+    data: {
+        acl: ['admin']
+    }
+})
+$rootScope.$on('$stateChangeStart', function(event, toState){
+    console.log(toState.data.acl);
+    // Would print "['admin']" when 'parent' is activated
+})</xmp>
+    </div></section>
+
+
+    <!--Named views-->
+
+    <!--events-->
+    <section class="slide"><div>
+        <h2>events</h2>
+<xmp class="prettyprint linenums">$rootScope.$on('$stateChangeStart', function(event, toState){
+    console.log(toState.name);
+})</xmp>
+<xmp class="prettyprint ">$stateChangeSuccess //fired once the state transition is complete.
+$stateChangeStart //fired when the transition begins.
+$stateNotFound //fired when a state cannot be found by its name.
+$stateChangeError //fired when an error occurs during transition.</xmp>
+    </div></section>
+
+    <!--404, auth, acl-->
+    <section class="slide"><div>
+        <h2>Authentication</h2>
+<xmp class="prettyprint linenums">$rootScope.$on('$stateChangeStart', function(event, toState){
+    if(toState.data.acl && !userSrv.has(toState.data.acl)) {
+        event.preventDefault();
+        $state.go('login');
+    }
+})</xmp>
+    </div></section>
+
+    <!--animations -->
+    <section class="slide"><div>
+        <h2>Animations</h2>
+    <p>
+    You can animate state change on ui-view with ngAnimate module
+        just like any other angular element with animation support
+    </p>
+        <code>&lt;div <mark>ui-view</mark> class=&quot;<mark>view-change-animation</mark>&quot;&gt;&lt;/div&gt;</code>
+    </div></section>
+
+
+    <!--THANK YOU-->
+    <section class="slide "><div>
+        <h2>Thank You !!!</h2>
+        <h3>Piotr Błaszczak</h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:pedro.blaszczak@gmail.com">pedro.blaszczak@gmail.com</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.github.com/MyFlowPL" target="_blank">github.com/MyFlowPL</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://twitter.com/MyFlowPl" target="_blank">@MyFlowPL</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/piotr.blaszczak" target="_blank">FB/piotr.blaszczak</a><br>
+        <h3>See you next month at WarsawJS</h3>
+        <br>
+        <br>
+        <img id="image" class="next" src="images/slack.jpg" />
+        <h2 class="next" style="text-align: right;">Questions & Comments</h2>
+        <style>
+            #image {
+                width: 50%;
+                position: absolute;
+                top: 55px;
+                right: 18px;
+                z-index: 1;
+            }
+        </style>
+    </div></section>
+
+    <p class="badge"><a href="../examples/index.html">Demo</a></p>
+
+    <div class="progress">
+        <div></div>
+    </div>
+    <script src="vendor/prettify.js"></script>
+    <script src="vendor/lang-css.js"></script>
+    <script src="vendor/gamepad/gamepad.js"></script>
+    <script src="vendor/shower/shower.js"></script>
+    <script src="vendor/shower/shower.gamepad.js"></script>
+</body>
+</html>

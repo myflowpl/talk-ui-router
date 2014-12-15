@@ -7,6 +7,27 @@
     margin: auto;
     padding: 0 5px;
 }
+.url-bar {
+    display: block;
+    list-style-type: none;
+    overflow: hidden;
+    border-bottom: 1px solid #B9B9B9;
+    background-color: #E2E2E2;
+    padding: 5px;
+}
+.url-bar div {
+    max-width: 500px;
+    margin: auto;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 3px;
+    padding: 0px 5px;
+}
+.url-bar span {
+    font-style: normal;
+    font-weight: normal;
+    color: gray;
+}
 .navbar .logo a {
     color: black;
     font-weight: bold;
@@ -29,8 +50,12 @@ body > ui-view {
     display: block;
     max-width: 500px;
     margin: auto;
-}
 
+}
+body {
+    margin: 0;
+    padding: 0;
+}
 .left {
     display: block;
     width: 20%;

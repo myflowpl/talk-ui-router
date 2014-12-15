@@ -6,16 +6,16 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('welcome', {
             url: "/",
-            templateUrl: "states/welcome.html"
+            templateUrl: "views/welcome.html"
         })
         .state('products', {
-            url: "/contact",
-            templateUrl: "states/products.html",
+            url: "/products",
+            templateUrl: "views/products.html",
             controller: 'products'
         })
         .state('products.product', {
             url: "/product/:id",
-            templateUrl: "states/product.html",
+            templateUrl: "views/product.html",
             controller: 'product'
         })
 });

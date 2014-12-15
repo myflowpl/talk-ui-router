@@ -4,20 +4,22 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('welcome', {
-            url: "/welcome",
-            templateUrl: "states/welcome.html"
+            url: "/",
+            templateUrl: "views/welcome.html"
         })
         .state('contact', {
             url: "/contact",
-            templateUrl: "states/contact.html",
-            controller: 'contact'
+            templateUrl: "views/contact.html",
+            controller: 'ContactController'
         })
 
-    $urlRouterProvider.otherwise("/welcome");
+    $urlRouterProvider.otherwise("/");
 });
 
-myApp.controller('contact', function($scope) {
+myApp.controller('ContactController', function($scope) {
     $scope.sendMessage = function(){
         alert('SEND: '+$scope.message);
     };
 })
+
+
