@@ -56,6 +56,10 @@ body {
     margin: 0;
     padding: 0;
 }
+.left ul {
+    margin: 0;
+    padding: 0;
+}
 .left {
     display: block;
     width: 20%;
@@ -65,6 +69,7 @@ body {
     padding: 10px 0;
     float: left;
 }
+
 .left li {
     margin: 10px 10px;
     display:block;
@@ -85,4 +90,48 @@ body {
 .view-change-animation.ng-leave {
     -webkit-animation: bounceOutRight 2s;
     animation: bounceOutRight 2s;
+}
+
+/*named views*/
+.root-view {
+    background-color: #009926;
+    padding: 10px 5px 5px;
+    overflow: hidden;
+}
+.welcome-content {
+    background-color: #B8B8FF;
+    padding: 10px 5px 5px;
+}
+.layout-view {
+    background-color: #B8B8FF;
+    overflow: hidden;
+    padding: 10px 5px 5px;
+}
+.layout-view h3 {
+    margin: 0;
+}
+.menu-view {
+    background-color: #FF7BFF;
+    overflow: hidden;
+    padding: 10px 5px 5px;
+}
+.center-view {
+    background-color: #EDED4D;
+    overflow: hidden;
+    padding: 10px 5px 5px;
+}
+.navbar-view {
+    background-color: #FFD7D7;
+    overflow: hidden;
+    padding: 10px 5px 5px;
+    margin-bottom: 5px;
+}
+.products-view {
+    background-color: #C8F5CE;
+    overflow: hidden;
+    padding: 10px 5px 5px;
+    margin-bottom: 5px;
+}
+.navbar-view .navbar {
+    border: 0;
 }

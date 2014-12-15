@@ -380,6 +380,30 @@ url: '/users/:id/details/{type}/{repeat:[0-9]+}?from&to'
     </div></section>
 
 
+    <!--Named views-->
+    <section class="slide "><div>
+        <h2>Named Views</h2>
+        <img style="height: 85%" src="images/namedviews.png" alt="" />
+    </div></section>
+
+
+    <!--Inheritance state definition-->
+    <section class="slide"><div>
+        <h2>Inheritance - state definition</h2>
+<xmp class="prettyprint linenums language-css">.state('products', {
+    url: "/contact",
+    templateUrl: "views/products.html",
+    controller: 'products'
+})
+.state('products.product', {
+    url: "/product/:id",
+    templateUrl: "views/product.html",
+    controller: 'product'
+})</xmp>
+        <a href="../examples/4_namedviews/index.html" target="_blank">Demo</a>
+</div></section>
+
+
     <!--Resolve -->
     <section class="slide"><div>
         <h2>resolve</h2>
@@ -411,8 +435,6 @@ $rootScope.$on('$stateChangeStart', function(event, toState){
 })</xmp>
     </div></section>
 
-
-    <!--Named views-->
 
     <!--events-->
     <section class="slide"><div>

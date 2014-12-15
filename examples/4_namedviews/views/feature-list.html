@@ -1,0 +1,8 @@
+<div>
+    <h3>Features of: {{product.name}}</h3>
+    <ul>
+        <li ng-repeat="feature in product.features">
+            <a ui-sref="products.product({id: product.id})">{{feature}}</a>
+        </li>
+    </ul>
+</div>
