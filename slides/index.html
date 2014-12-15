@@ -383,25 +383,153 @@ url: '/users/:id/details/{type}/{repeat:[0-9]+}?from&to'
     <!--Named views-->
     <section class="slide "><div>
         <h2>Named Views</h2>
-        <img style="height: 85%" src="images/namedviews.png" alt="" />
+        <img style="height: 70%" src="images/namedviews.png" alt="" /><br>
+        <a href="../examples/4_namedviews/index.html" target="_blank">Demo</a>
     </div></section>
 
 
-    <!--Inheritance state definition-->
+
+    <!-- named views code -->
     <section class="slide"><div>
-        <h2>Inheritance - state definition</h2>
-<xmp class="prettyprint linenums language-css">.state('products', {
-    url: "/contact",
-    templateUrl: "views/products.html",
-    controller: 'products'
+        <h2>Named views Configuration</h2>
+<xmp style="overflow: auto; height: 500px;" class="prettyprint linenums">// home page
+.state('welcome', {
+    url: "/",
+    templateUrl: "views/welcome.html"
 })
+
+// main application layout
+.state('app', {
+    abstract: true,
+    views: {
+        "": {
+            templateUrl: "views/layout.html"
+        },
+        "navbar@app": {
+            templateUrl: "views/navbar.html"
+        }
+    }
+})
+
+// products page layout
+.state('products', {
+    url: "/products",
+    parent: 'app',
+    views: {
+        "": {
+            templateUrl: "views/products.html"
+        },
+        "content@products": {
+            template: "Default product list page, ready for your customization"
+        },
+        "menu@products": {
+            templateUrl: "views/menu.html",
+            controller: 'ProductsController'
+        }
+    },
+    resolve: {
+        products: function(){
+            return [
+                {id:1, name: 'AngularJS', features:['routing', 'services', 'directives', 'data binding']},
+                {id:2, name: 'ReactJS', features:['faster', 'routing', 'data binding']},
+                {id:3, name: 'EmberJS', features:['fast', 'routing', 'data binding']},
+            ]
+        }
+    }
+})
+
+// product features list
 .state('products.product', {
     url: "/product/:id",
-    templateUrl: "views/product.html",
-    controller: 'product'
+    views: {
+        "content@products": {
+            templateUrl: "views/feature-list.html",
+            controller: 'FeatureListController'
+        }
+    }
+})
+
+// single feature view
+.state('products.product.feature', {
+    url: "/feature/:index",
+    views: {
+        "content@products": {
+            templateUrl: "views/feature.html",
+            controller: 'FeatureController'
+        }
+    }
+})
+
+// feature edit in parent template
+.state('products.product.feature-edit', {
+    url: "/feature-edit/:index",
+    views: {
+        "navbar@app": {
+            template: "<b>Edit Tools hoses here</b>"
+        },
+        "@app": {
+            templateUrl: "views/feature-edit.html",
+            controller: 'FeatureEditController'
+        }
+    }
+})
+
+// feature edit in modal
+.state('products.product.feature-view', {
+    url: "/feature-view/:index",
+    views: {
+        "modal@": {
+            templateUrl: "views/modal-layout.html"
+        },
+        "@products.product.feature-view": {
+            templateUrl: "views/feature-edit.html",
+            controller: 'FeatureEditController'
+        }
+    }
+})
+
+// contact page rendeed in app layout
+.state('contact', {
+    url: "/contact",
+    parent: 'app',
+    views: {
+        "": {
+            templateUrl: "views/contact.html"
+        }
+    }
 })</xmp>
-        <a href="../examples/4_namedviews/index.html" target="_blank">Demo</a>
-</div></section>
+    </div></section>
+
+
+
+    <!-- named views code -->
+    <section class="slide"><div>
+        <h2>Named views Controllers</h2>
+<xmp style="overflow: auto; height: 500px;" class="prettyprint linenums">function ProductsController($scope, products) {
+    $scope.products = products;
+})
+
+function FeatureListController($scope, $stateParams, products, $filter) {
+    $scope.id = $stateParams.id;
+    $scope.product = $filter('filter')(products, $stateParams.id)[0];
+}
+
+function FeatureController($scope, $stateParams, products, $filter) {
+    $scope.id = $stateParams.id;
+    $scope.product = $filter('filter')(products, $stateParams.id)[0];
+    if($scope.product) {
+        $scope.feature = $scope.product.features[$stateParams.index]
+    }
+}
+
+function FeatureEditController($scope, $stateParams, products, $filter) {
+    $scope.id = $stateParams.id;
+    $scope.product = $filter('filter')(products, $stateParams.id)[0];
+    if($scope.product) {
+        $scope.index = $stateParams.index;
+    }
+})</xmp>
+    </div></section>
 
 
     <!--Resolve -->

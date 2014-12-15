@@ -88,7 +88,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             }
         })
         .state('contact', {
-            url: "/products",
+            url: "/contact",
             parent: 'app',
             views: {
                 "": {
