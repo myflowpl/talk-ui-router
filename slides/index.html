@@ -441,10 +441,29 @@ $stateChangeError //fired when an error occurs during transition.</xmp>
     <section class="slide"><div>
         <h2>Animations</h2>
     <p>
-    You can animate state change on ui-view with ngAnimate module
-        just like any other angular element with animation support
+    You can animate state change on <mark>ui-view</mark> with <mark>ngAnimate</mark> module
+        just like any other angular element with animation support<br>
     </p>
-        <code>&lt;div <mark>ui-view</mark> class=&quot;<mark>view-change-animation</mark>&quot;&gt;&lt;/div&gt;</code>
+
+
+        ui-router + ngAnimate + <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a>
+    </div></section>
+
+    <!--animations demo -->
+    <section class="slide"><div>
+        <h2>Animations with ui-router</h2>
+        <mark>&lt;div <mark>ui-view</mark> class=&quot;<mark>view-change-animation</mark>&quot;&gt;&lt;/div&gt;</mark>
+
+<pre class="next" style="white-space:pre">
+.view-change-animation.<mark>ng-enter</mark> {
+        -webkit-animation: bounceInLeft 1s;
+        animation: bounceInLeft 1s;
+}
+.view-change-animation.<mark>ng-leave</mark> {
+        -webkit-animation: bounceOutRight 2s;
+        animation: bounceOutRight 2s;
+}
+</pre>
 
         <a href="../examples/3_animation/index.html" target="_blank">Demo</a>
     </div></section>
