@@ -66,6 +66,9 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         .state('products.product.feature-edit', {
             url: "/feature-edit/:index",
             views: {
+                "navbar@app": {
+                    template: "<b>Edit Tools hoses here</b>"
+                },
                 "@app": {
                     templateUrl: "views/feature-edit.html",
                     controller: 'FeatureEditController'
