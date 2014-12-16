@@ -1,7 +1,7 @@
 talk-ui-router
 ==============
 
-![Logo](/themes/warsawjs/pictures/logo.png)
+![Logo](/slides/themes/warsawjs/pictures/logo.png)
 
 Large Application Routing using AngularJS UI-Router
 
